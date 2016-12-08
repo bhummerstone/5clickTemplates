@@ -18,10 +18,10 @@
 		f. Benchmark model
 	2) Wait for deployment (may be long if a larger model)
 	3) Logon to machine IP listed in portal
-	4) Navigate to /mnt/resource
+	4) Navigate to /mnt/resource/scratch/benchmark
 	5) configure VPN
 	6) Run fluent, t20 is the number of cores you want to run on
-		a. time(fluent 3d -g -mpi=intel -pib.dapl -mpiopt="-genv I_MPI_DAPL_PROVIDER=ofa-v2-ib0" -ssh -t20 -cnf=hosts -i runme.jou)
+		a. time(fluent 3d -g -mpi=intel -pib.dapl -mpiopt="-genv I_MPI_DAPL_PROVIDER=ofa-v2-ib0" -ssh -t20 -cnf=/mnt/resource/scratch/hosts -i runme.jou)
 
 
 <b>Architecture</b>
@@ -40,7 +40,7 @@ A number of packages are installed during deployment in order to support the NFS
 
 <code>ssh {username}@{vm-private-ip-address}</code>
 
-In addition ANSYS Fluent version 17.2 is installed into the <u>/mnt/nfsshare/</u> directory and the path to the Fluent binary is added to ~.bashrc. The benchmark model that was selected at deploy time is downloaded and unpacked as <u>benchmark.cas.tgz</u> and <u>benchmark.dat.tgz</u> these are the 'Case' and 'Data' files for Fluent. They are placed in /mnt/resource on the Jumpbox. A file named runme.jou contains the scripting commands for Fluent. With these three files a benchmark can be run by issuing the following command.
+In addition ANSYS Fluent version 17.2 is installed into the <u>/mnt/nfsshare/</u> directory and the path to the Fluent binary is added to ~.bashrc. The benchmark model that was selected at deploy time is downloaded and unpacked as <u>benchmark.cas.tgz</u> and <u>benchmark.dat.tgz</u> these are the 'Case' and 'Data' files for Fluent. They are placed in /mnt/resource/scratch/benchmark on the Jumpbox. A file named runme.jou contains the scripting commands for Fluent. With these three files a benchmark can be run by issuing the following command.
 
 <code>time(fluent 3d -g -mpi=intel -pib.dapl -mpiopt="-genv I_MPI_DAPL_PROVIDER=ofa-v2-ib0" -ssh -t48 -cnf=hosts -i runme.jou)</code>
 
